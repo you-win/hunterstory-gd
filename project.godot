@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Hunter-story-gd"
-run/main_scene="res://screens/main-menu-screen/main_menu_screen.tscn"
+run/main_scene="res://screens/main_display.tscn"
 config/icon="res://assets/icon.png"
 
 [autoload]

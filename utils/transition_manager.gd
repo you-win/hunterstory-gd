@@ -36,6 +36,13 @@ func _ready() -> void:
 	color_rect.anchor_bottom = 1.0
 	color_rect.rect_pivot_offset = (viewport_size_half)
 	color_rect.color = CLEAR_COLOR
+	
+	add_child(canvas)
+	canvas.add_child(color_rect)
+	
+	yield(get_tree(), "idle_frame")
+	
+	remove_child(canvas)
 
 func _exit_tree() -> void:
 	if tween:
@@ -61,8 +68,7 @@ func _on_first_tween_complete() -> void:
 func _on_second_tween_complete() -> void:
 	tween.disconnect("tween_all_completed", self, "_on_second_tween_complete")
 	
-	canvas.remove_child(color_rect)
-	get_tree().root.remove_child(canvas)
+	GameManager.main.remove_child(canvas)
 
 func _on_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
 	print(object.color)
@@ -79,8 +85,7 @@ func _on_tween_step(object: Object, key: NodePath, elapsed: float, value: Object
 func change_screen_to(path: String) -> void:
 	screen_path_to_change_to = path
 	
-	get_tree().root.add_child(canvas)
-	canvas.add_child(color_rect)
+	GameManager.main.add_child(canvas)
 	
 	tween.connect("tween_all_completed", self, "_on_first_tween_complete")
 	tween.interpolate_property(color_rect, "color:a", color_rect.color.a, BLACK_COLOR.a, TWEEN_DURATION)

@@ -5,6 +5,8 @@ signal message_logged(text)
 const ENEMY_GROUP: String = "Enemy"
 const FLOOR_GROUP: String = "Floor"
 
+var main: CanvasLayer
+
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################

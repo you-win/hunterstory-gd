@@ -1,44 +1,19 @@
-extends RigidBody2D
+extends CanvasLayer
 
-const LIFETIME: float = 10.0
-var lifetime_counter: float = 0.0
+const TransitionScreen: PackedScene = preload("res://screens/transition_screen.tscn")
 
-var initial_rotation: float = 0.0
-
-export var speed: float = 1000.0
-export var damage: float = 2.0
-export var knockback: float = 10.0
+onready var viewport: Viewport = $ViewportContainer/Viewport
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
 
 func _ready() -> void:
-	$Area2D.connect("body_entered", self, "_on_body_entered")
-	
-	global_rotation = initial_rotation
-	apply_central_impulse(Vector2(speed, 0.0).rotated(initial_rotation))
-
-func _physics_process(delta: float) -> void:
-	lifetime_counter += delta
-	if lifetime_counter > LIFETIME:
-		queue_free()
-		return
-	
-	global_rotation = atan2(linear_velocity.y, linear_velocity.x)
+	GameManager.main = self
 
 ###############################################################################
 # Connections                                                                 #
 ###############################################################################
-
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group(GameManager.ENEMY_GROUP):
-		queue_free()
-		body.receive_damage(damage, {
-			"knockback": knockback
-		})
-	elif body.is_in_group(GameManager.FLOOR_GROUP):
-		queue_free()
 
 ###############################################################################
 # Private functions                                                           #
@@ -48,4 +23,18 @@ func _on_body_entered(body: Node) -> void:
 # Public functions                                                            #
 ###############################################################################
 
-
+func change_screen(path: String) -> void:
+	var new_scene = load(path).instance()
+	
+	var transition_screen: CanvasLayer = TransitionScreen.instance()
+	var image_data: Image = viewport.get_texture().get_data()
+	image_data.flip_y()
+	transition_screen.last_screen_image = image_data
+	transition_screen.viewport_size = viewport.size
+	
+	call_deferred("add_child", transition_screen)
+	viewport.get_child(0).queue_free()
+	
+	yield(transition_screen, "faded_out")
+	
+	viewport.call_deferred("add_child", new_scene)
