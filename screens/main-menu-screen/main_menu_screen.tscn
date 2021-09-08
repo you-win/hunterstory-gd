@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://screens/main-menu-screen/main_menu_screen.gd" type="Script" id=1]
+
+[node name="MainMenuScreen" type="CanvasLayer"]
+script = ExtResource( 1 )
+continue_game_path = NodePath("MenuContainer/VBoxContainer/ContinueGame")
+new_game_path = NodePath("MenuContainer/VBoxContainer/NewGame")
+options_path = NodePath("MenuContainer/VBoxContainer/Options")
+quit_path = NodePath("MenuContainer/VBoxContainer/Quit")
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.270588, 0.270588, 0.270588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuContainer" type="PanelContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 773.0
+margin_bottom = 423.0
+
+[node name="ContinueGame" type="Button" parent="MenuContainer/VBoxContainer"]
+margin_right = 766.0
+margin_bottom = 101.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = "Continue Game"
+
+[node name="NewGame" type="Button" parent="MenuContainer/VBoxContainer"]
+margin_top = 105.0
+margin_right = 766.0
+margin_bottom = 206.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "New Game"
+
+[node name="Options" type="Button" parent="MenuContainer/VBoxContainer"]
+margin_top = 210.0
+margin_right = 766.0
+margin_bottom = 311.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+text = "Options"
+
+[node name="Quit" type="Button" parent="MenuContainer/VBoxContainer"]
+margin_top = 315.0
+margin_right = 766.0
+margin_bottom = 416.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Quit"

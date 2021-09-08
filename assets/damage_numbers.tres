@@ -1,0 +1,37 @@
+[gd_resource type="BitmapFont" load_steps=7 format=2]
+
+[ext_resource path="res://assets/Numbers.png" type="Texture" id=1]
+[ext_resource path="res://addons/texture_fonts/Classes/TextureFont.gd" type="Script" id=2]
+[ext_resource path="res://addons/texture_fonts/Classes/TextureFontSettings.gd" type="Script" id=3]
+[ext_resource path="res://addons/texture_fonts/Classes/TextureFontMapping.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+char_settings = {
+}
+kerning_pairs = [  ]
+gap = 0
+horizontal_align = 0
+vertical_align = 0
+monospace = true
+preview_color = Color( 0.12549, 0.141176, 0.192157, 1 )
+preview_chars = ""
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+source_texture = ExtResource( 1 )
+scaled_texture = ExtResource( 1 )
+rect_size = Vector2( 100, 100 )
+rect_gap = Vector2( 0, 0 )
+texture_offset = Vector2( 0, 0 )
+scale = 1
+interpolation = 0
+chars = "0123456789"
+
+[resource]
+textures = [ ExtResource( 1 ) ]
+chars = PoolIntArray( 32, 0, 0, 0, 0, 0, 0, 0, 100, 56, 0, 800, 0, 100, 100, 0, 0, 100, 48, 0, 0, 0, 100, 100, 0, 0, 100, 57, 0, 900, 0, 100, 100, 0, 0, 100, 49, 0, 100, 0, 100, 100, 0, 0, 100, 50, 0, 200, 0, 100, 100, 0, 0, 100, 51, 0, 300, 0, 100, 100, 0, 0, 100, 52, 0, 400, 0, 100, 100, 0, 0, 100, 53, 0, 500, 0, 100, 100, 0, 0, 100, 54, 0, 600, 0, 100, 100, 0, 0, 100, 55, 0, 700, 0, 100, 100, 0, 0, 100 )
+height = 100.0
+script = ExtResource( 2 )
+texture_mappings = [ SubResource( 2 ) ]
+font_settings = SubResource( 1 )

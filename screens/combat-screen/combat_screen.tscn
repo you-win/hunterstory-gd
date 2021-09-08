@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://screens/combat-screen/combat_screen.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1500, 100 )
+
+[node name="CombatScreen" type="Node2D"]
+script = ExtResource( 2 )
+player_path = NodePath("Player")
+arrows_path = NodePath("Arrows")
+enemies_path = NodePath("Enemies")
+enemy_spawn_path = NodePath("EnemySpawn")
+damage_numbers_path = NodePath("DamageNumbers")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="Ground" type="StaticBody2D" parent="." groups=[
+"Floor",
+]]
+position = Vector2( 0, 482.247 )
+
+[node name="Sprite" type="Sprite" parent="Ground"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -686.433, 261.779 )
+
+[node name="Arrows" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemySpawn" type="Position2D" parent="."]
+position = Vector2( 848.136, 213.816 )
+
+[node name="DamageNumbers" type="Node2D" parent="."]
