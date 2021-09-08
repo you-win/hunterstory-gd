@@ -28,7 +28,9 @@ func _on_continue_game() -> void:
 	pass
 
 func _on_new_game() -> void:
-	GameManager.main.change_screen("res://screens/combat-screen/combat_screen.tscn")
+#	GameManager.main.change_screen("res://screens/combat-screen/combat_screen.tscn")
+	GameManager.new_game_data()
+	GameManager.main.change_screen("res://screens/level-select-screen/level_select_screen.tscn")
 
 func _on_options() -> void:
 	pass

@@ -1,34 +1,44 @@
-extends Node
+extends HBoxContainer
 
-signal message_logged(text)
+enum Stats { NONE = 0, STRENGTH, DEXTERITY, AGILITY, INTELLIGENCE, LUCK }
 
-const GameData: Resource = preload("res://utils/game_data.gd")
+signal added(stat)
+signal subtracted(stat)
 
-const ENEMY_GROUP: String = "Enemy"
-const FLOOR_GROUP: String = "Floor"
-
-const Stats: Dictionary = {
-	"STRENGTH": "strength",
-	"DEXTERITY": "dexterity",
-	"AGILITY": "agility",
-	"INTELLIGENCE": "intelligence",
-	"LUCK": "luck"
-}
-
-var main: CanvasLayer
-
-var game_data: Reference
+export(Stats) var stat
+var stat_name: String
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
 
 func _ready() -> void:
-	pass
+	match stat:
+		Stats.STRENGTH:
+			stat_name = GameManager.Stats.STRENGTH
+		Stats.DEXTERITY:
+			stat_name = GameManager.Stats.DEXTERITY
+		Stats.AGILITY:
+			stat_name = GameManager.Stats.AGILITY
+		Stats.INTELLIGENCE:
+			stat_name = GameManager.Stats.INTELLIGENCE
+		Stats.LUCK:
+			stat_name = GameManager.Stats.LUCK
+		_:
+			print_debug("unhandled stat name")
+	
+	$Add.connect("pressed", self, "_on_add")
+	$Subtract.connect("pressed", self, "_on_sub")
 
 ###############################################################################
 # Connections                                                                 #
 ###############################################################################
+
+func _on_add() -> void:
+	emit_signal("added", stat_name)
+
+func _on_sub() -> void:
+	emit_signal("subtracted", stat_name)
 
 ###############################################################################
 # Private functions                                                           #
@@ -38,13 +48,4 @@ func _ready() -> void:
 # Public functions                                                            #
 ###############################################################################
 
-func log_message(text: String, is_error: bool = false) -> void:
-	if is_error:
-		text = "[ERROR] %s" % text
-		assert(false, text)
-	
-	print(text)
-	emit_signal("message_logged", text)
 
-func new_game_data() -> void:
-	game_data = GameData.new()

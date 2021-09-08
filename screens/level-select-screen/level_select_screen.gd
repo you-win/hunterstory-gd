@@ -1,23 +1,15 @@
-extends Node
+extends CanvasLayer
 
-signal message_logged(text)
+export var skills_prev_path: NodePath
+export var skills_next_path: NodePath
+export var skills_path: NodePath
 
-const GameData: Resource = preload("res://utils/game_data.gd")
+export var levels_prev_path: NodePath
+export var levels_next_path: NodePath
+export var levels_path: NodePath
 
-const ENEMY_GROUP: String = "Enemy"
-const FLOOR_GROUP: String = "Floor"
-
-const Stats: Dictionary = {
-	"STRENGTH": "strength",
-	"DEXTERITY": "dexterity",
-	"AGILITY": "agility",
-	"INTELLIGENCE": "intelligence",
-	"LUCK": "luck"
-}
-
-var main: CanvasLayer
-
-var game_data: Reference
+export var coins_path: NodePath
+export var experience_path: NodePath
 
 ###############################################################################
 # Builtin functions                                                           #
@@ -38,13 +30,4 @@ func _ready() -> void:
 # Public functions                                                            #
 ###############################################################################
 
-func log_message(text: String, is_error: bool = false) -> void:
-	if is_error:
-		text = "[ERROR] %s" % text
-		assert(false, text)
-	
-	print(text)
-	emit_signal("message_logged", text)
 
-func new_game_data() -> void:
-	game_data = GameData.new()

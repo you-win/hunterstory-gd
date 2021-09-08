@@ -1,0 +1,168 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/level-select-screen/stats.gd" type="Script" id=1]
+[ext_resource path="res://screens/level-select-screen/add_sub.tscn" type="PackedScene" id=2]
+
+[node name="Stats" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+strength_path = NodePath("Strength/Value")
+strength_add_sub_path = NodePath("Strength/AddSub")
+dexterity_path = NodePath("Dexterity/Value")
+dexterity_add_sub_path = NodePath("Dexterity/AddSub")
+agility_path = NodePath("Agility/Value")
+agility_add_sub_path = NodePath("Agility/AddSub")
+intelligence_path = NodePath("Intelligence/Value")
+intelligence_add_sub_path = NodePath("Intelligence/AddSub")
+luck_path = NodePath("Luck/Value")
+luck_add_sub_path = NodePath("Luck/AddSub")
+
+[node name="Strength" type="HBoxContainer" parent="."]
+margin_right = 1600.0
+margin_bottom = 176.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Strength"]
+margin_top = 81.0
+margin_right = 798.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Strength:"
+
+[node name="Value" type="Label" parent="Strength"]
+margin_left = 802.0
+margin_top = 81.0
+margin_right = 1600.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+
+[node name="AddSub" parent="Strength" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1069.0
+margin_right = 1600.0
+margin_bottom = 176.0
+stat = 1
+
+[node name="Dexterity" type="HBoxContainer" parent="."]
+margin_top = 180.0
+margin_right = 1600.0
+margin_bottom = 357.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Dexterity"]
+margin_top = 81.0
+margin_right = 798.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Dexterity:"
+
+[node name="Value" type="Label" parent="Dexterity"]
+margin_left = 802.0
+margin_top = 81.0
+margin_right = 1600.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+
+[node name="AddSub" parent="Dexterity" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1069.0
+margin_right = 1600.0
+margin_bottom = 177.0
+stat = 2
+
+[node name="Agility" type="HBoxContainer" parent="."]
+margin_top = 361.0
+margin_right = 1600.0
+margin_bottom = 538.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Agility"]
+margin_top = 81.0
+margin_right = 798.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Agility:"
+
+[node name="Value" type="Label" parent="Agility"]
+margin_left = 802.0
+margin_top = 81.0
+margin_right = 1600.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+
+[node name="AddSub" parent="Agility" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1069.0
+margin_right = 1600.0
+margin_bottom = 177.0
+stat = 3
+
+[node name="Intelligence" type="HBoxContainer" parent="."]
+margin_top = 542.0
+margin_right = 1600.0
+margin_bottom = 719.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Intelligence"]
+margin_top = 81.0
+margin_right = 798.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Intelligence:"
+
+[node name="Value" type="Label" parent="Intelligence"]
+margin_left = 802.0
+margin_top = 81.0
+margin_right = 1600.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+
+[node name="AddSub" parent="Intelligence" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1069.0
+margin_right = 1600.0
+margin_bottom = 177.0
+stat = 4
+
+[node name="Luck" type="HBoxContainer" parent="."]
+margin_top = 723.0
+margin_right = 1600.0
+margin_bottom = 900.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Luck"]
+margin_top = 81.0
+margin_right = 798.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+text = "Luck:"
+
+[node name="Value" type="Label" parent="Luck"]
+margin_left = 802.0
+margin_top = 81.0
+margin_right = 1600.0
+margin_bottom = 95.0
+size_flags_horizontal = 3
+
+[node name="AddSub" parent="Luck" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1069.0
+margin_right = 1600.0
+margin_bottom = 177.0
+stat = 5

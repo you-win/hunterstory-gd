@@ -27,6 +27,7 @@ config/icon="res://assets/icon.png"
 [autoload]
 
 GameManager="*res://utils/game_manager.gd"
+SB="*res://utils/signal_broadcaster.gd"
 
 [debug]
 
