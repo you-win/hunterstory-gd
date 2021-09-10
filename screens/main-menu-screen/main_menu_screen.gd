@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const LevelSelectScreen: PackedScene = preload("res://screens/level-select-screen/level_select_screen.tscn")
+
 export var continue_game_path: NodePath
 export var new_game_path: NodePath
 export var options_path: NodePath
@@ -30,7 +32,8 @@ func _on_continue_game() -> void:
 func _on_new_game() -> void:
 #	GameManager.main.change_screen("res://screens/combat-screen/combat_screen.tscn")
 	GameManager.new_game_data()
-	GameManager.main.change_screen("res://screens/level-select-screen/level_select_screen.tscn")
+	var screen = LevelSelectScreen.instance()
+	GameManager.main.change_screen(screen)
 
 func _on_options() -> void:
 	pass

@@ -27,7 +27,7 @@ var damage_numbers_node: Node2D
 func _ready() -> void:
 	anim_player.connect("animation_finished", self, "_on_anim_finished")
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	mouse_position = get_global_mouse_position()
 	
 	bow_sprite.look_at(mouse_position)
@@ -37,10 +37,9 @@ func _physics_process(delta: float) -> void:
 			State.IDLE:
 				if (current_state == State.DRAWING or current_state == State.DRAWN):
 					var arrow: RigidBody2D = Arrow.instance()
+					arrow.initial_position = global_position
 					arrow.initial_rotation = bow_sprite.global_rotation
 					arrows_node.call_deferred("add_child", arrow)
-					yield(arrow, "ready")
-					arrow.global_position = global_position
 				anim_player.play(Anims.IDLE)
 			State.DRAWING:
 				anim_player.play(Anims.DRAWING)

@@ -14,6 +14,8 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
 onready var collision_extents: Vector2 = collision_shape.shape.extents
 
+var initial_position: Vector2
+
 export var health: float = 10.0
 export var speed: float = 50.0
 
@@ -27,6 +29,8 @@ var damage_numbers_node: Node2D
 
 func _ready() -> void:
 	add_to_group(GameManager.ENEMY_GROUP)
+
+	global_position = initial_position
 	
 	anim_player.connect("animation_finished", self, "_on_animation_finished")
 	anim_player.play(Anim.MOVE)

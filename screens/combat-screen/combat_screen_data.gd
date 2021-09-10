@@ -1,15 +1,36 @@
-extends CanvasLayer
+class_name CombatScreenData
+extends Reference
 
-const TransitionScreen: PackedScene = preload("res://screens/transition_screen.tscn")
+var level_name: String = "changeme"
 
-onready var viewport: Viewport = $ViewportContainer/Viewport
+const SpawnRate: Dictionary = {
+	"NONE": "none",
+	"SLOW": "slow",
+	"NORMAL": "normal",
+	"FAST": "fast",
+	"INSTANT": "instant"
+}
+var spawn_rate: String = SpawnRate.NONE
+
+const SpawnType: Dictionary = {
+	"NONE": "none",
+	"LINEAR": "linear",
+	"BATCH": "batch"
+}
+var spawn_type: String = SpawnType.NONE
+
+const Enemy: Dictionary = {
+	"NONE": "none",
+	"BLUE_SNAIL": "blue_snail"
+}
+# Enemy enum to int amount
+var enemies: Dictionary = {}
+
+var special_instructions: Dictionary = {}
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
-
-func _ready() -> void:
-	GameManager.main = self
 
 ###############################################################################
 # Connections                                                                 #
@@ -22,17 +43,3 @@ func _ready() -> void:
 ###############################################################################
 # Public functions                                                            #
 ###############################################################################
-
-func change_screen(screen: Node) -> void:
-	var transition_screen: CanvasLayer = TransitionScreen.instance()
-	var image_data: Image = viewport.get_texture().get_data()
-	image_data.flip_y()
-	transition_screen.last_screen_image = image_data
-	transition_screen.viewport_size = viewport.size
-	
-	call_deferred("add_child", transition_screen)
-	viewport.get_child(0).queue_free()
-	
-	yield(transition_screen, "faded_out")
-	
-	viewport.call_deferred("add_child", screen)

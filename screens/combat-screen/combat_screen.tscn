@@ -12,6 +12,8 @@ player_path = NodePath("Player")
 arrows_path = NodePath("Arrows")
 enemies_path = NodePath("Enemies")
 enemy_spawn_path = NodePath("EnemySpawn")
+spawn_timer_path = NodePath("SpawnTimer")
+spawn_delay_timer_path = NodePath("SpawnDelayTimer")
 damage_numbers_path = NodePath("DamageNumbers")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -35,6 +37,12 @@ position = Vector2( -686.433, 261.779 )
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="EnemySpawn" type="Position2D" parent="."]
-position = Vector2( 848.136, 213.816 )
+position = Vector2( 888.011, 197.779 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="SpawnDelayTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="DamageNumbers" type="Node2D" parent="."]

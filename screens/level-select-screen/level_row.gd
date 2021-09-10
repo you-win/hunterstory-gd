@@ -1,51 +1,26 @@
-extends RigidBody2D
+extends PanelContainer
 
-const LIFETIME: float = 10.0
-var lifetime_counter: float = 0.0
+signal pressed_with_data(data)
 
-var initial_position: Vector2
-var initial_rotation: float
-
-export var speed: float = 1000.0
-export var damage: float = 2.0
-export var knockback: float = 10.0
-
-var has_collided := false
+var data: CombatScreenData
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
 
 func _ready() -> void:
-	$Area2D.connect("body_entered", self, "_on_body_entered")
+	$HBoxContainer/HBoxContainer/Button.connect("pressed", self, "_on_pressed")
 	
-	global_position = initial_position
-	global_rotation = initial_rotation
-
-	apply_central_impulse(Vector2(speed, 0.0).rotated(initial_rotation))
-
-func _physics_process(delta: float) -> void:
-	lifetime_counter += delta
-	if lifetime_counter > LIFETIME:
-		queue_free()
-		return
+	$HBoxContainer/LevelName.text = data.level_name
 	
-	global_rotation = atan2(linear_velocity.y, linear_velocity.x)
+	# TODO store and pull clear rating from somewhere
 
 ###############################################################################
 # Connections                                                                 #
 ###############################################################################
 
-func _on_body_entered(body: Node) -> void:
-	if not has_collided:
-		has_collided = true
-		if body.is_in_group(GameManager.ENEMY_GROUP):
-			queue_free()
-			body.receive_damage(damage, {
-				"knockback": knockback
-			})
-		elif body.is_in_group(GameManager.FLOOR_GROUP):
-			queue_free()
+func _on_pressed() -> void:
+	emit_signal("pressed_with_data", data)
 
 ###############################################################################
 # Private functions                                                           #
