@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	global_position = initial_position
 	global_rotation = initial_rotation
-
+	
 	apply_central_impulse(Vector2(speed, 0.0).rotated(initial_rotation))
 
 func _physics_process(delta: float) -> void:

@@ -1,7 +1,6 @@
 extends CanvasLayer
 
 const LevelRow: PackedScene = preload("res://screens/level-select-screen/level_row.tscn")
-const CombatScreen: PackedScene = preload("res://screens/combat-screen/combat_screen.tscn")
 
 export var skills_prev_path: NodePath
 export var skills_next_path: NodePath
@@ -79,7 +78,7 @@ func _on_levels_next() -> void:
 	pass
 
 func _on_level_row_pressed(data: CombatScreenData) -> void:
-	var screen: Node2D = CombatScreen.instance()
+	var screen: Node2D = load("res://screens/combat-screen/combat_screen.tscn").instance()
 	screen.data = data
 	GameManager.main.change_screen(screen)
 

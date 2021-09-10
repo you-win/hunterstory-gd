@@ -18,6 +18,7 @@ var initial_position: Vector2
 
 export var health: float = 10.0
 export var speed: float = 50.0
+export var experience: float = 1.0
 
 var knockback: float = 0.0
 
@@ -42,8 +43,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			move_and_slide(Vector2(knockback, GRAVITY))
 	elif health <= 0.0 and anim_player.current_animation != Anim.KILLED:
-		anim_player.play(Anim.KILLED)
-		$CollisionShape2D.set_deferred("disabled", true)
+		_killed()
 
 ###############################################################################
 # Connections                                                                 #
@@ -58,6 +58,12 @@ func _on_animation_finished(anim_name: String) -> void:
 ###############################################################################
 # Private functions                                                           #
 ###############################################################################
+
+func _killed() -> void:
+	anim_player.play(Anim.KILLED)
+	$CollisionShape2D.set_deferred("disabled", true)
+	
+	GameManager.game_data.experience += experience
 
 ###############################################################################
 # Public functions                                                            #

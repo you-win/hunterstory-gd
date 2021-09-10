@@ -39,6 +39,8 @@ var is_batched := false
 export var max_batch_spawn: int = 5
 var spawn_count: int = 0
 
+var done_spawning := false
+
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
@@ -78,6 +80,13 @@ func _ready() -> void:
 	else:
 		spawn_timer.start(spawn_rate)
 
+func _process(_delta: float) -> void:
+	if done_spawning:
+		if enemies.get_child_count() == 0:
+			# TODO show stats first
+			var screen = load("res://screens/level-select-screen/level_select_screen.tscn").instance()
+			GameManager.main.change_screen(screen)
+
 ###############################################################################
 # Connections                                                                 #
 ###############################################################################
@@ -102,16 +111,9 @@ func _on_spawn_delay_timer() -> void:
 # Private functions                                                           #
 ###############################################################################
 
-func _spawn_blue_snail() -> void:
-	# TODO debug
-	var blue_snail = load("res://entities/enemies/blue_snail.tscn").instance()
-	blue_snail.damage_numbers_node = damage_numbers
-	enemies.call_deferred("add_child", blue_snail)
-	yield(blue_snail, "ready")
-	blue_snail.global_position = enemy_spawn.global_position
-
 func _spawn_enemy() -> bool:
 	if enemy_list.size() <= 0:
+		done_spawning = true
 		return false
 	
 	var random_enemy_int: int = rng.randi_range(0, enemy_list.size() - 1)

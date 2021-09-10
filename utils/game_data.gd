@@ -1,7 +1,9 @@
 extends Reference
 
-var coins: int
-var experience: float
+var coins: int = 0
+var experience: float = 0.0
+
+var level: int = 1
 
 # Stats
 var stat_points: int = 0
