@@ -1,7 +1,9 @@
 extends Reference
 
+const EXP_TO_LEVEL_FACTOR: float = 3.0
+
 var coins: int = 0
-var experience: float = 0.0
+var experience: float = 0.0 setget _set_experience
 
 var level: int = 1
 
@@ -53,8 +55,16 @@ func _on_stat_points_modified(value: int) -> void:
 # Private functions                                                           #
 ###############################################################################
 
+func _set_experience(value: float) -> void:
+	experience = value
+	var exp_to_next_level: float = get_experience_to_next_level()
+	if experience >= exp_to_next_level:
+		experience = experience - exp_to_next_level
+		level += 1
+
 ###############################################################################
 # Public functions                                                            #
 ###############################################################################
 
-
+func get_experience_to_next_level() -> float:
+	return round(exp(level) * EXP_TO_LEVEL_FACTOR)

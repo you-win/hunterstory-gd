@@ -37,6 +37,10 @@ func _physics_process(_delta: float) -> void:
 			State.IDLE:
 				if (current_state == State.DRAWING or current_state == State.DRAWN):
 					var arrow: RigidBody2D = Arrow.instance()
+					
+					# TODO testing
+					arrow.damage += GameManager.game_data.level * 10
+					
 					arrow.initial_position = global_position
 					arrow.initial_rotation = bow_sprite.global_rotation
 					arrows_node.call_deferred("add_child", arrow)

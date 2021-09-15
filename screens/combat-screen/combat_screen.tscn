@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://screens/combat-screen/combat_screen.gd" type="Script" id=2]
+[ext_resource path="res://assets/styles/main_theme.tres" type="Theme" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1500, 100 )
@@ -15,6 +16,9 @@ enemy_spawn_path = NodePath("EnemySpawn")
 spawn_timer_path = NodePath("SpawnTimer")
 spawn_delay_timer_path = NodePath("SpawnDelayTimer")
 damage_numbers_path = NodePath("DamageNumbers")
+coins_path = NodePath("UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Coins/Value")
+level_path = NodePath("UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level/HBoxContainer/asdf")
+level_progress_path = NodePath("UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level/ProgressBar")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -28,6 +32,10 @@ position = Vector2( 0, 482.247 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="Ground"]
+color = Color( 0.117647, 0.423529, 0.192157, 1 )
+polygon = PoolVector2Array( -1500, -100, 1500, -100, 1500, 100, -1500, 100 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( -686.433, 261.779 )
@@ -46,3 +54,123 @@ one_shot = true
 one_shot = true
 
 [node name="DamageNumbers" type="Node2D" parent="."]
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="UILayer"]
+anchor_right = 0.5
+anchor_bottom = 0.3
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+mouse_filter = 2
+theme = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/PanelContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 770.0
+margin_bottom = 240.0
+rect_pivot_offset = Vector2( -856.964, 24.475 )
+
+[node name="MetaStats" type="PanelContainer" parent="UILayer/PanelContainer/VBoxContainer"]
+margin_right = 760.0
+margin_bottom = 58.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/MetaStats"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 750.0
+margin_bottom = 48.0
+
+[node name="Coins" type="HBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer"]
+margin_right = 365.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Coins"]
+margin_top = 12.0
+margin_right = 177.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+text = "Coins:"
+
+[node name="Value" type="Label" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Coins"]
+margin_left = 187.0
+margin_top = 12.0
+margin_right = 365.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+
+[node name="Level" type="VBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer"]
+margin_left = 375.0
+margin_right = 740.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level"]
+margin_right = 365.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level/HBoxContainer"]
+margin_right = 177.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Level:"
+
+[node name="asdf" type="Label" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level/HBoxContainer"]
+margin_left = 187.0
+margin_right = 365.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="UILayer/PanelContainer/VBoxContainer/MetaStats/HBoxContainer/Level"]
+margin_top = 24.0
+margin_right = 365.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+
+[node name="GameplayContainer" type="VBoxContainer" parent="UILayer/PanelContainer/VBoxContainer"]
+margin_top = 68.0
+margin_right = 760.0
+margin_bottom = 230.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkillsContainer" type="PanelContainer" parent="UILayer/PanelContainer/VBoxContainer/GameplayContainer"]
+margin_right = 760.0
+margin_bottom = 76.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HboxContainer" type="HBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/GameplayContainer/SkillsContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 750.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemsContainer" type="PanelContainer" parent="UILayer/PanelContainer/VBoxContainer/GameplayContainer"]
+margin_top = 86.0
+margin_right = 760.0
+margin_bottom = 162.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HboxContainer" type="HBoxContainer" parent="UILayer/PanelContainer/VBoxContainer/GameplayContainer/ItemsContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 750.0
+margin_bottom = 66.0
+size_flags_horizontal = 3
+size_flags_vertical = 3

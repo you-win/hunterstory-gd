@@ -10,9 +10,6 @@ export var levels_prev_path: NodePath
 export var levels_next_path: NodePath
 export var levels_path: NodePath
 
-export var coins_path: NodePath
-export var experience_path: NodePath
-
 onready var skills_prev: Button = get_node(skills_prev_path)
 onready var skills_next: Button = get_node(skills_next_path)
 onready var skills: VBoxContainer = get_node(skills_path)
@@ -27,14 +24,21 @@ const LEVELS_PER_PAGE: int = 10
 # CombatScreenData
 var level_data: Array = []
 
+export var coins_path: NodePath
 onready var coins: Label = get_node(coins_path)
-onready var experience: ProgressBar = get_node(experience_path)
+
+export var level_progress_path: NodePath
+onready var level_progress: ProgressBar = get_node(level_progress_path)
+
+export var level_path: NodePath
+onready var level: Label = get_node(level_path)
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
 
 func _ready() -> void:
+	# TODO test level values
 	var data0 := CombatScreenData.new()
 	data0.level_name = "Blue Snails Galore"
 	data0.spawn_rate = CombatScreenData.SpawnRate.NORMAL
@@ -55,6 +59,11 @@ func _ready() -> void:
 		row.data = i
 		row.connect("pressed_with_data", self, "_on_level_row_pressed")
 		levels.call_deferred("add_child", row)
+	
+	coins.text = str(GameManager.game_data.coins)
+	level.text = str(GameManager.game_data.level)
+	level_progress.max_value = GameManager.game_data.get_experience_to_next_level()
+	level_progress.value = GameManager.game_data.experience
 
 ###############################################################################
 # Connections                                                                 #

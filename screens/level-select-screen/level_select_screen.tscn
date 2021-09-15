@@ -15,7 +15,8 @@ levels_prev_path = NodePath("PanelContainer/VBoxContainer/HBoxContainer/RightCon
 levels_next_path = NodePath("PanelContainer/VBoxContainer/HBoxContainer/RightContainer/PanelContainer/LevelsContainer/LevelsNav/HBoxContainer/Next")
 levels_path = NodePath("PanelContainer/VBoxContainer/HBoxContainer/RightContainer/PanelContainer/LevelsContainer/Levels")
 coins_path = NodePath("PanelContainer/VBoxContainer/PanelContainer/MetaStats/Coins/Value")
-experience_path = NodePath("PanelContainer/VBoxContainer/PanelContainer/MetaStats/Experience/Value")
+level_progress_path = NodePath("PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level/ProgressBar")
+level_path = NodePath("PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level/HBoxContainer/Value")
 
 [node name="Background" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -222,7 +223,7 @@ margin_top = 12.0
 margin_right = 382.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
-text = "Coins"
+text = "Coins:"
 
 [node name="Value" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Coins"]
 margin_left = 392.0
@@ -231,21 +232,30 @@ margin_right = 775.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 
-[node name="Experience" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats"]
+[node name="Level" type="VBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats"]
 margin_left = 785.0
 margin_right = 1560.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Experience"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level"]
+margin_right = 775.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level/HBoxContainer"]
+margin_right = 382.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Level:"
+
+[node name="Value" type="Label" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level/HBoxContainer"]
+margin_left = 392.0
 margin_right = 775.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
-text = "Experience"
-align = 1
 
-[node name="Value" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Experience"]
+[node name="ProgressBar" type="ProgressBar" parent="PanelContainer/VBoxContainer/PanelContainer/MetaStats/Level"]
 margin_top = 24.0
 margin_right = 775.0
 margin_bottom = 38.0
