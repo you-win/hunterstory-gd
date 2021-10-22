@@ -2,27 +2,14 @@ extends Node2D
 
 const ENEMY_FOLDER: String = "res://entities/enemies/"
 
-export var player_path: NodePath
-export var arrows_path: NodePath
-export var enemies_path: NodePath
-export var enemy_spawn_path: NodePath
-export var spawn_timer_path: NodePath
-export var spawn_delay_timer_path: NodePath
-export var damage_numbers_path: NodePath
-export var coins_path: NodePath
-export var level_path: NodePath
-export var level_progress_path: NodePath
-
-onready var player: Node2D = get_node(player_path) as Node2D
-onready var arrows: Node2D = get_node(arrows_path) as Node2D
-onready var enemies: Node2D = get_node(enemies_path) as Node2D
-onready var enemy_spawn: Node2D = get_node(enemy_spawn_path) as Node2D
-onready var spawn_timer: Timer = get_node(spawn_timer_path) as Timer
-onready var spawn_delay_timer: Timer = get_node(spawn_delay_timer_path) as Timer
-onready var damage_numbers: Node2D = get_node(damage_numbers_path) as Node2D
-onready var coins: Label = get_node(coins_path) as Label
-onready var level: Label = get_node(level_path) as Label
-onready var level_progress: ProgressBar = get_node(level_progress_path) as ProgressBar
+onready var player: Player = $Player
+onready var arrows: Node2D = $Arrows
+onready var enemies: Node2D = $Enemies
+onready var enemy_spawn: Node2D = $EnemySpawn
+onready var spawn_timer: Timer = $SpawnTimer
+onready var spawn_delay_timer: Timer = $SpawnDelayTimer
+onready var damage_numbers: Node2D = $DamageNumbers
+onready var ui_layer: UILayer = $UILayer
 
 var data: CombatScreenData
 
@@ -55,6 +42,8 @@ func _ready() -> void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 	
+	ui_layer.setup_player(player)
+	
 	enemies.global_position = enemy_spawn.global_position
 
 	player.arrows_node = arrows
@@ -72,7 +61,7 @@ func _ready() -> void:
 		var file_name = dir.get_next()
 		while file_name != "":
 			var trimmed_name: String = file_name.get_file().get_basename()
-			if not "base_enemy" in trimmed_name:
+			if (not "base_enemy" in trimmed_name and not file_name.get_extension() == "gd"):
 				enemy_paths[trimmed_name] = "%s%s" % [ENEMY_FOLDER, file_name]
 			file_name = dir.get_next()
 
@@ -85,11 +74,6 @@ func _ready() -> void:
 		spawn_delay_timer.start(spawn_rate)
 	else:
 		spawn_timer.start(spawn_rate)
-	
-	coins.text = str(GameManager.game_data.coins)
-	level.text = str(GameManager.game_data.level)
-	level_progress.max_value = GameManager.game_data.get_experience_to_next_level()
-	level_progress.value = GameManager.game_data.experience
 
 func _process(_delta: float) -> void:
 	if done_spawning:
@@ -97,11 +81,6 @@ func _process(_delta: float) -> void:
 			# TODO show stats first
 			var screen = load("res://screens/level-select-screen/level_select_screen.tscn").instance()
 			GameManager.main.change_screen(screen)
-	
-	coins.text = str(GameManager.game_data.coins)
-	level.text = str(GameManager.game_data.level)
-	level_progress.max_value = GameManager.game_data.get_experience_to_next_level()
-	level_progress.value = GameManager.game_data.experience
 
 ###############################################################################
 # Connections                                                                 #

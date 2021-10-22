@@ -1,34 +1,33 @@
-extends Node
+class_name ShopContainer
+extends PanelContainer
 
-signal message_logged(text)
+onready var previous: Button = $VBoxContainer/ShopNav/HBoxContainer/Previous
+onready var next: Button = $VBoxContainer/ShopNav/HBoxContainer/Next
+var current_page: int = 1
 
-const GameData: Resource = preload("res://utils/game_data.gd")
 
-const ENEMY_GROUP: String = "Enemy"
-const FLOOR_GROUP: String = "Floor"
-
-const Stats: Dictionary = {
-	"STRENGTH": "strength",
-	"DEXTERITY": "dexterity",
-	"AGILITY": "agility",
-	"INTELLIGENCE": "intelligence",
-	"LUCK": "luck"
-}
-
-var main: CanvasLayer
-
-var game_data: GameData
 
 ###############################################################################
 # Builtin functions                                                           #
 ###############################################################################
 
 func _ready() -> void:
-	pass
+	previous.connect("pressed", self, "_on_previous")
+	next.connect("pressed", self, "_on_next")
 
 ###############################################################################
 # Connections                                                                 #
 ###############################################################################
+
+func _on_previous() -> void:
+	if current_page > 2:
+		current_page -= 1
+	pass
+
+func _on_next() -> void:
+	# TODO placeholder
+	if current_page < 10:
+		current_page += 1
 
 ###############################################################################
 # Private functions                                                           #
@@ -37,14 +36,3 @@ func _ready() -> void:
 ###############################################################################
 # Public functions                                                            #
 ###############################################################################
-
-func log_message(text: String, is_error: bool = false) -> void:
-	if is_error:
-		text = "[ERROR] %s" % text
-		assert(false, text)
-	
-	print(text)
-	emit_signal("message_logged", text)
-
-func new_game_data() -> void:
-	game_data = GameData.new()

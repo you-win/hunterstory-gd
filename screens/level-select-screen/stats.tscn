@@ -25,22 +25,22 @@ luck_add_sub_path = NodePath("Luck/AddSub")
 
 [node name="Strength" type="HBoxContainer" parent="."]
 margin_right = 1600.0
-margin_bottom = 176.0
+margin_bottom = 172.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Strength"]
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 798.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 text = "Strength:"
 
 [node name="Value" type="Label" parent="Strength"]
 margin_left = 802.0
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 1600.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="AddSub" parent="Strength" instance=ExtResource( 2 )]
@@ -52,24 +52,24 @@ margin_bottom = 176.0
 stat = 1
 
 [node name="Dexterity" type="HBoxContainer" parent="."]
-margin_top = 180.0
+margin_top = 176.0
 margin_right = 1600.0
-margin_bottom = 357.0
+margin_bottom = 348.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Dexterity"]
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 798.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 text = "Dexterity:"
 
 [node name="Value" type="Label" parent="Dexterity"]
 margin_left = 802.0
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 1600.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="AddSub" parent="Dexterity" instance=ExtResource( 2 )]
@@ -81,24 +81,24 @@ margin_bottom = 177.0
 stat = 2
 
 [node name="Agility" type="HBoxContainer" parent="."]
-margin_top = 361.0
+margin_top = 352.0
 margin_right = 1600.0
-margin_bottom = 538.0
+margin_bottom = 525.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Agility"]
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 798.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 text = "Agility:"
 
 [node name="Value" type="Label" parent="Agility"]
 margin_left = 802.0
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 1600.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="AddSub" parent="Agility" instance=ExtResource( 2 )]
@@ -110,24 +110,24 @@ margin_bottom = 177.0
 stat = 3
 
 [node name="Intelligence" type="HBoxContainer" parent="."]
-margin_top = 542.0
+margin_top = 529.0
 margin_right = 1600.0
-margin_bottom = 719.0
+margin_bottom = 701.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Intelligence"]
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 798.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 text = "Intelligence:"
 
 [node name="Value" type="Label" parent="Intelligence"]
 margin_left = 802.0
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 1600.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="AddSub" parent="Intelligence" instance=ExtResource( 2 )]
@@ -139,24 +139,24 @@ margin_bottom = 177.0
 stat = 4
 
 [node name="Luck" type="HBoxContainer" parent="."]
-margin_top = 723.0
+margin_top = 705.0
 margin_right = 1600.0
-margin_bottom = 900.0
+margin_bottom = 877.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Label" type="Label" parent="Luck"]
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 798.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 text = "Luck:"
 
 [node name="Value" type="Label" parent="Luck"]
 margin_left = 802.0
-margin_top = 81.0
+margin_top = 79.0
 margin_right = 1600.0
-margin_bottom = 95.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 
 [node name="AddSub" parent="Luck" instance=ExtResource( 2 )]
@@ -166,3 +166,41 @@ margin_left = 1069.0
 margin_right = 1600.0
 margin_bottom = 177.0
 stat = 5
+
+[node name="RemainingStatPoints" type="HBoxContainer" parent="."]
+margin_top = 881.0
+margin_right = 1600.0
+margin_bottom = 895.0
+
+[node name="Label" type="Label" parent="RemainingStatPoints"]
+margin_right = 798.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+text = "Remaining:"
+align = 1
+
+[node name="Value" type="Label" parent="RemainingStatPoints"]
+margin_left = 802.0
+margin_right = 1600.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+align = 1
+
+[node name="ApplyReset" type="HBoxContainer" parent="."]
+margin_top = 899.0
+margin_right = 1600.0
+margin_bottom = 899.0
+
+[node name="Reset" type="Button" parent="ApplyReset"]
+visible = false
+margin_right = 1600.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Reset"
+
+[node name="Apply" type="Button" parent="ApplyReset"]
+visible = false
+margin_right = 798.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Apply"

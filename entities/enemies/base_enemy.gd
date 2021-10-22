@@ -19,6 +19,7 @@ var initial_position: Vector2
 export var health: float = 10.0
 export var speed: float = 50.0
 export var experience: float = 1.0
+export var coins: float = 1.0
 
 var knockback: float = 0.0
 
@@ -64,6 +65,7 @@ func _killed() -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 	
 	GameManager.game_data.experience += experience
+	GameManager.game_data.coins += ceil(coins)
 
 ###############################################################################
 # Public functions                                                            #

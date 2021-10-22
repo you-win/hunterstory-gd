@@ -9,19 +9,61 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Arrow",
+"language": "GDScript",
+"path": "res://entities/player/arrow.gd"
+}, {
 "base": "Reference",
 "class": "CombatScreenData",
 "language": "GDScript",
 "path": "res://screens/combat-screen/combat_screen_data.gd"
 }, {
+"base": "Reference",
+"class": "GameData",
+"language": "GDScript",
+"path": "res://utils/game_data.gd"
+}, {
+"base": "PanelContainer",
+"class": "MetaStats",
+"language": "GDScript",
+"path": "res://screens/gui/meta_stats.gd"
+}, {
+"base": "Node2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://entities/player/player.gd"
+}, {
+"base": "PanelContainer",
+"class": "ShopContainer",
+"language": "GDScript",
+"path": "res://screens/level-select-screen/shop_container.gd"
+}, {
+"base": "TextureRect",
+"class": "ShopIcon",
+"language": "GDScript",
+"path": "res://screens/level-select-screen/shop-icons/shop_icon.gd"
+}, {
 "base": "BitmapFont",
 "class": "TextureFont",
 "language": "GDScript",
 "path": "res://addons/texture_fonts/Classes/TextureFont.gd"
+}, {
+"base": "CanvasLayer",
+"class": "UILayer",
+"language": "GDScript",
+"path": "res://screens/combat-screen/ui_layer.gd"
 } ]
 _global_script_class_icons={
+"Arrow": "",
 "CombatScreenData": "",
-"TextureFont": "res://addons/texture_fonts/Assets/TextureFont.svg"
+"GameData": "",
+"MetaStats": "",
+"Player": "",
+"ShopContainer": "",
+"ShopIcon": "",
+"TextureFont": "res://addons/texture_fonts/Assets/TextureFont.svg",
+"UILayer": ""
 }
 
 [application]

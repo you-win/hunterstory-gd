@@ -1,0 +1,84 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://screens/level-select-screen/shop_container.gd" type="Script" id=1]
+[ext_resource path="res://screens/level-select-screen/shop-icons/shop_icon.tscn" type="PackedScene" id=2]
+
+[node name="ShopContainer" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1593.0
+margin_bottom = 893.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ShopNav" type="VBoxContainer" parent="VBoxContainer"]
+margin_right = 1586.0
+margin_bottom = 38.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ShopNav"]
+margin_right = 1586.0
+margin_bottom = 14.0
+text = "Shop"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ShopNav"]
+margin_top = 18.0
+margin_right = 1586.0
+margin_bottom = 38.0
+
+[node name="Previous" type="Button" parent="VBoxContainer/ShopNav/HBoxContainer"]
+margin_right = 791.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "< Previous"
+
+[node name="Next" type="Button" parent="VBoxContainer/ShopNav/HBoxContainer"]
+margin_left = 795.0
+margin_right = 1586.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Next >"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 1586.0
+margin_bottom = 886.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 761.0
+margin_top = 322.0
+margin_right = 825.0
+margin_bottom = 522.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="ShopIcon" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+shop_item_name = "Test item"
+shop_description = "asdfasdf"
+
+[node name="ShopIcon2" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 68.0
+margin_bottom = 132.0
+shop_item_name = "asdf"
+shop_description = "sdfzxvc"
+
+[node name="ShopIcon3" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 136.0
+margin_bottom = 200.0
+shop_item_name = "qwer"
+shop_description = "qwert"

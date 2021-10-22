@@ -1,3 +1,4 @@
+class_name Arrow
 extends RigidBody2D
 
 const LIFETIME: float = 10.0
@@ -7,7 +8,7 @@ var initial_position: Vector2
 var initial_rotation: float
 
 export var speed: float = 1000.0
-export var damage: float = 2.0
+export var damage: float = 1.0
 export var knockback: float = 10.0
 
 var has_collided := false

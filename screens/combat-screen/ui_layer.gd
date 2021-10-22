@@ -1,23 +1,13 @@
-extends Node
+class_name UILayer
+extends CanvasLayer
 
-signal message_logged(text)
+onready var meta_stats = $PanelContainer/VBoxContainer/MetaStats
 
-const GameData: Resource = preload("res://utils/game_data.gd")
+onready var draw_strength_value = $PanelContainer/VBoxContainer/GameplayContainer/SkillsContainer/HboxContainer/DrawStrengthContainer/Value
+const DRAW_STRENGTH_FORMAT = "%.f"
 
-const ENEMY_GROUP: String = "Enemy"
-const FLOOR_GROUP: String = "Floor"
-
-const Stats: Dictionary = {
-	"STRENGTH": "strength",
-	"DEXTERITY": "dexterity",
-	"AGILITY": "agility",
-	"INTELLIGENCE": "intelligence",
-	"LUCK": "luck"
-}
-
-var main: CanvasLayer
-
-var game_data: GameData
+var player: Player
+var player_anim_player: AnimationPlayer
 
 ###############################################################################
 # Builtin functions                                                           #
@@ -25,6 +15,14 @@ var game_data: GameData
 
 func _ready() -> void:
 	pass
+
+func _process(_delta: float) -> void:
+	if player.anim_player.current_animation == Player.Anims.DRAWING:
+		draw_strength_value.text = DRAW_STRENGTH_FORMAT % ((player.arrow_draw_scale / 1.0) * 100.0)
+	elif player.anim_player.current_animation == Player.Anims.DRAWN:
+		draw_strength_value.text = "100"
+	else:
+		draw_strength_value.text = "0"
 
 ###############################################################################
 # Connections                                                                 #
@@ -38,13 +36,6 @@ func _ready() -> void:
 # Public functions                                                            #
 ###############################################################################
 
-func log_message(text: String, is_error: bool = false) -> void:
-	if is_error:
-		text = "[ERROR] %s" % text
-		assert(false, text)
-	
-	print(text)
-	emit_signal("message_logged", text)
-
-func new_game_data() -> void:
-	game_data = GameData.new()
+func setup_player(p: Player) -> void:
+	player = p
+	player_anim_player = player.anim_player

@@ -1,3 +1,4 @@
+class_name Player
 extends Node2D
 
 const Arrow: PackedScene = preload("res://entities/player/arrow.tscn")
@@ -12,6 +13,7 @@ const Anims: Dictionary = {
 
 onready var bow_sprite: Sprite = $BowSprite
 onready var anim_player: AnimationPlayer = $AnimationPlayer
+onready var game_data := GameManager.game_data
 
 var mouse_position := Vector2.ZERO
 var current_state: int = State.NONE
@@ -19,6 +21,7 @@ var next_state: int = State.NONE
 
 var arrows_node: Node2D
 var damage_numbers_node: Node2D
+var arrow_draw_scale: float = 1.0
 
 ###############################################################################
 # Builtin functions                                                           #
@@ -32,19 +35,28 @@ func _physics_process(_delta: float) -> void:
 	
 	bow_sprite.look_at(mouse_position)
 	
+	if anim_player.current_animation == Anims.DRAWING:
+		arrow_draw_scale = (anim_player.current_animation_position / anim_player.current_animation_length)
+	elif anim_player.current_animation == Anims.DRAWN:
+		arrow_draw_scale = 1.0
+	else:
+		arrow_draw_scale = 0.0
+	
 	if current_state != next_state:
 		match next_state:
 			State.IDLE:
 				if (current_state == State.DRAWING or current_state == State.DRAWN):
-					var arrow: RigidBody2D = Arrow.instance()
+					var arrow: Arrow = Arrow.instance()
 					
-					# TODO testing
-					arrow.damage += GameManager.game_data.level * 10
+					# TODO bow damage not accounted for
+					arrow.damage = max(1.0, (1.2 * ((4 * game_data.dexterity) + game_data.strength) * ((arrow.damage + 10.0) / 100.0)) * arrow_draw_scale)
+					arrow.speed *= arrow_draw_scale
 					
 					arrow.initial_position = global_position
 					arrow.initial_rotation = bow_sprite.global_rotation
 					arrows_node.call_deferred("add_child", arrow)
-				anim_player.play(Anims.IDLE)
+				if anim_player.current_animation != Anims.IDLE:
+					anim_player.play(Anims.IDLE)
 			State.DRAWING:
 				anim_player.play(Anims.DRAWING)
 			State.DRAWN:
